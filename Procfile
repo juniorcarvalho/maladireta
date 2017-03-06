@@ -1,1 +1,1 @@
-web: gunicorn eventex.wsgi --log-file -
+web: gunicorn casaditalia.wsgi --log-file -
