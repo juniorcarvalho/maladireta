@@ -16,7 +16,7 @@ class FamiliaModelAdmin(admin.ModelAdmin):
 class AssociadoModelAdmin(admin.ModelAdmin):
     list_display = ['nome', 'familia', 'grupo', 'telefone', 'celular', 'email']
     search_fields = ('nome', 'familia')
-    list_filter = ('familia', 'grupo')
+    list_filter = ('grupo__nome', 'familia')
     form = AssociadoForm
     fieldsets = [
         (None,

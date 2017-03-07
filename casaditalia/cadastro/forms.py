@@ -2,6 +2,7 @@ from django.forms import ModelForm, TextInput
 
 
 class AssociadoForm(ModelForm):
+
     class Meta:
         widgets = {
             'nome': TextInput(attrs={'class': 'input-xxlarge'}),

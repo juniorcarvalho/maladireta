@@ -15,7 +15,7 @@ class Familia(models.Model):
 
 
 class Grupo(models.Model):
-    nome = models.CharField('Nome', max_length=50)
+    nome = models.CharField('Grupo', max_length=50)
 
     class Meta:
         verbose_name = 'grupo'
