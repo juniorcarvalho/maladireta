@@ -4,7 +4,7 @@ from django.core import validators
 
 
 class Familia(models.Model):
-    nome = models.CharField('Nome', max_length=50)
+    nome = models.CharField('Nome', max_length=50, unique=True)
 
     class Meta:
         verbose_name = 'família'
@@ -15,7 +15,7 @@ class Familia(models.Model):
 
 
 class Grupo(models.Model):
-    nome = models.CharField('Grupo', max_length=50)
+    nome = models.CharField('Grupo', max_length=50, unique=True)
 
     class Meta:
         verbose_name = 'grupo'
