@@ -27,6 +27,13 @@ class Grupo(models.Model):
 
 class Associado(models.Model):
     nome = models.CharField('Nome', max_length=100)
+    cpf = models.CharField('CPF', max_length=14, null=True, blank=True, validators=[
+        validators.RegexValidator(
+            re.compile('^\d{3}.\d{3}.\d{3}-\d{2}$'),
+            'Informe o CPF no formato xxx.xxx.xxx-xx',
+            'invalid'
+        )
+    ])
     grupo = models.ForeignKey(Grupo)
     familia = models.ForeignKey(Familia, blank=True, null=True)
     associado = models.BooleanField('Associado')
@@ -36,16 +43,14 @@ class Associado(models.Model):
             'Informe o CEP no formado xxxxx-xxx.',
             'invalid'
         )
-    ]
-
-                           )
+    ])
     endereco = models.CharField('Endereço', max_length=100, blank=True, null=True)
     numero = models.CharField('Número', max_length=10, blank=True, null=True)
     complemento = models.CharField('Complemento', max_length=50, blank=True, null=True)
     bairro = models.CharField('Bairro', max_length=50, blank=True, null=True)
     cidade = models.CharField('Cidade', max_length=50, blank=True, null=True)
     uf = models.CharField('UF', max_length=2, blank=True, null=True)
-    email = models.EmailField('Email', unique=True, blank=True, null=True)
+    email = models.EmailField('Email', blank=True, null=True)
     telefone = models.CharField('Telefone', max_length=15, blank=True, null=True,
                                 validators=[
                                     validators.RegexValidator(
