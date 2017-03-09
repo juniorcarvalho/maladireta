@@ -131,5 +131,5 @@ admin.site.index_title = 'Mala Direta'
 admin.site.site_title = 'Mala Direta'
 
 SUIT_CONFIG = {
-    'ADMIN_NAME': 'Casa Ditália'
+    'ADMIN_NAME': 'Casa Ditália Barbacena'
 }
