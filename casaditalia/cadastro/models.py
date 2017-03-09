@@ -27,7 +27,7 @@ class Grupo(models.Model):
 
 class Associado(models.Model):
     nome = models.CharField('Nome', max_length=100)
-    cpf = models.CharField('CPF', max_length=14, null=True, blank=True, validators=[
+    cpf = models.CharField('CPF', max_length=14, unique=True, validators=[
         validators.RegexValidator(
             re.compile('^\d{3}.\d{3}.\d{3}-\d{2}$'),
             'Informe o CPF no formato xxx.xxx.xxx-xx',

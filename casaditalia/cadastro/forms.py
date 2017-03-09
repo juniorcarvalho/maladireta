@@ -1,6 +1,6 @@
 from django.forms import ModelForm, TextInput, forms
 from .models import Associado, Familia, Grupo
-
+from .cpf import CPF
 
 class AssociadoForm(ModelForm):
     class Meta:
@@ -15,6 +15,12 @@ class AssociadoForm(ModelForm):
             'uf': TextInput(attrs={'class': 'input-small'}),
             'email': TextInput(attrs={'class': 'input-xxlarge'}),
         }
+
+    def clean_cpf(self):
+        cpf = self.cleaned_data.get('cpf')
+        if not CPF(cpf).isValid():
+           raise forms.ValidationError('CPF inválido')
+        return self.cleaned_data['cpf']
 
     def clean_nome(self):
         return self.cleaned_data.get('nome').upper()
@@ -34,30 +40,38 @@ class AssociadoForm(ModelForm):
     def clean_uf(self):
         return self.cleaned_data.get('uf').upper()
 
-    def clean(self):
-        associado = self.cleaned_data.get('associado')
-        cpf_old = self.instance.cpf
-        cpf_new = self.cleaned_data.get('cpf')
+    def clean_email(self):
         email_old = self.instance.email
         email_new = self.cleaned_data.get('email')
-
-        # validando cpf
-        # se for associado, obrigatório informar CPF
-        if associado and len(cpf_new) == 0:
-            raise forms.ValidationError('Obrigatório informar CPF para associado.')
-
-        # se for associado e informou cpf, verifica duplicidade
-        if len(cpf_new) > 0:
-            if Associado.objects.filter(cpf=cpf_new).exclude(cpf=cpf_old).exists():
-                raise forms.ValidationError('CPF já cadastrado')
-
-        # validando email
-        # se informou email, verifica duplicidade
         if len(email_new) > 0:
             if Associado.objects.filter(email=email_new).exclude(email=email_old).exists():
                 raise forms.ValidationError('Email já cadastrado')
+        return self.cleaned_data['email']
 
-        return self.cleaned_data
+    # def clean(self):
+    #     #associado = self.cleaned_data.get('associado')
+    #     #cpf_old = self.instance.cpf
+    #     #cpf_new = self.cleaned_data.get('cpf')
+    #     email_old = self.instance.email
+    #     email_new = self.cleaned_data.get('email')
+    #
+    #     # validando cpf
+    #     # se for associado, obrigatório informar CPF
+    #     # if associado and len(cpf_new) == 0:
+    #     #     raise forms.ValidationError('Obrigatório informar CPF para associado.')
+    #
+    #     # se for associado e informou cpf, verifica duplicidade
+    #     # if len(cpf_new) > 0:
+    #     #     if Associado.objects.filter(cpf=cpf_new).exclude(cpf=cpf_old).exists():
+    #     #         raise forms.ValidationError('CPF já cadastrado')
+    #
+    #     # validando email
+    #     # se informou email, verifica duplicidade
+    #     if len(email_new) > 0:
+    #         if Associado.objects.filter(email=email_new).exclude(email=email_old).exists():
+    #             raise forms.ValidationError('Email já cadastrado')
+    #
+    #     return self.cleaned_data
 
 
 class FamiliaForm(ModelForm):
