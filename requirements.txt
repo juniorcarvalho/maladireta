@@ -7,4 +7,5 @@ six==1.10.0
 static3==0.7.0
 gunicorn==19.4.1
 psycopg2==2.6.1
+fixmydjango==0.2
 
