@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'casaditalia.cadastro.apps.CadastroConfig',
+    'casaditalia.financeiro.apps.FinanceiroConfig',
     'suit',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'fixmydjango',
 ]
 
 MIDDLEWARE = [

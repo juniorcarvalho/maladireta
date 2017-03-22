@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.conf import settings
-from .models import Grupo, Familia, Associado
+from .models import Grupo, Familia, Associado, AssociadoFamilia
 from .forms import AssociadoForm, FamiliaForm, GrupoForm
 
 
@@ -26,14 +26,20 @@ class FamiliaModelAdmin(admin.ModelAdmin):
         }
 
 
+class AssociadoFamiliaInLine(admin.TabularInline):
+    model = AssociadoFamilia
+    extra = 1
+
+
 class AssociadoModelAdmin(admin.ModelAdmin):
-    list_display = ['nome', 'familia', 'grupo', 'telefone', 'celular', 'email']
-    search_fields = ('nome', 'familia')
-    list_filter = ('grupo__nome', 'familia')
+    inlines = [AssociadoFamiliaInLine]
+    list_display = ['nome', 'grupo', 'telefone', 'celular', 'email']
+    search_fields = ('nome',)
+    list_filter = ('grupo__nome',)
     form = AssociadoForm
     fieldsets = [
         (None,
-         {'fields': ['nome', 'cpf', 'grupo', 'familia', 'associado']}
+         {'fields': ['nome', 'cpf', 'grupo', 'associado']}
          ),
         ('Endereço', {
             'fields': ['cep', ('endereco', 'numero'), ('complemento', 'bairro'),
@@ -44,11 +50,14 @@ class AssociadoModelAdmin(admin.ModelAdmin):
         })
     ]
 
+    # def familia(self, obj):
+    #     return AssociadoFamilia.objects.filter(associado=obj.associado).first()
+
     class Media:
         js = (
             'https://code.jquery.com/jquery-3.1.1.min.js',
             'https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js',
-            settings.STATIC_URL + 'js/main.js',
+            settings.STATIC_URL + 'js/cadastro.js',
         )
         css = {
             'all': (settings.STATIC_URL + 'css/main.css',)

@@ -35,8 +35,7 @@ class Associado(models.Model):
         )
     ])
     grupo = models.ForeignKey(Grupo)
-    familia = models.ForeignKey(Familia, blank=True, null=True)
-    associado = models.BooleanField('Associado')
+    associado = models.BooleanField('Contribuinte')
     cep = models.CharField('CEP', max_length=9, blank=True, null=True, validators=[
         validators.RegexValidator(
             re.compile('^\d{5}-\d{3}$'),
@@ -78,3 +77,16 @@ class Associado(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+class AssociadoFamilia(models.Model):
+    associado = models.ForeignKey(Associado, verbose_name='associado')
+    familia = models.ForeignKey(Familia, verbose_name='familia', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'família'
+        verbose_name_plural = 'famílias'
+        unique_together = (('associado', 'familia'))
+
+    def __str__(self):
+        return self.familia.nome

@@ -2,10 +2,11 @@ from django.forms import ModelForm, TextInput, forms
 from .models import Associado, Familia, Grupo
 from .cpf import CPF
 
+
 class AssociadoForm(ModelForm):
     class Meta:
         model = Associado
-        fields = ['nome', 'cpf', 'grupo', 'familia', 'associado', 'cep',
+        fields = ['nome', 'cpf', 'grupo', 'associado', 'cep',
                   'endereco', 'numero', 'complemento', 'bairro', 'cidade',
                   'uf', 'email', 'telefone', 'celular']
         widgets = {
