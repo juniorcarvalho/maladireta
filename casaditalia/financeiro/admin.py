@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Receber
+#from .models import Receber
 from .forms import ReceberForm
 from django.conf import settings
 
