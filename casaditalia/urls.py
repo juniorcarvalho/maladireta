@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from casaditalia.cadastro import views
 
 urlpatterns = [
-    #url(r'^grappelli/', include('grappelli.urls')),
     url(r'^', admin.site.urls),
-
+    url(r'^relatorio-cadastro/$', views.relatorioCadastro,name='rel-cad'),
 ]
 
-admin.site.site_header = 'Casa Ditália'
+admin.site.site_header = 'Casa Ditália Barbacena'

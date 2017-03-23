@@ -1,0 +1,26 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}
+    {{ block.super }}
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+      <li>
+          <a href="/">Início</a>
+          <span class="divider">»</span>
+      </li>
+      <li class="active">Relatórios do Cadastro</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        <h1>Relatórios do Cadastro</h1>
+    </div>
+{% endblock %}

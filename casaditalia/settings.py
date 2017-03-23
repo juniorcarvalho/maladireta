@@ -130,5 +130,14 @@ admin.site.index_title = 'Mala Direta'
 admin.site.site_title = 'Mala Direta'
 
 SUIT_CONFIG = {
-    'ADMIN_NAME': 'Casa Ditália Barbacena'
+    'ADMIN_NAME': 'Casa Ditália Barbacena',
+    'SEARCH_URL': '',
+    'MENU_OPEN_FIRST_CHILD': True,
+    'MENU': (
+        'sites',
+        {'app': 'auth', 'models': ('user', 'group')},
+        '-',
+        {'app': 'cadastro', 'models':('Associado', 'Familia', 'Grupo')},
+        {'label': 'Relatórios do Cadastro', 'url': 'rel-cad', 'icon': 'icon-print'},
+    )
 }
