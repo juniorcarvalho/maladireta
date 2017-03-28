@@ -138,6 +138,6 @@ SUIT_CONFIG = {
         {'app': 'auth', 'models': ('user', 'group')},
         '-',
         {'app': 'cadastro', 'models':('Associado', 'Familia', 'Grupo')},
-        {'label': 'Relatórios do Cadastro', 'url': 'rel-cad', 'icon': 'icon-print'},
+        {'label': 'Listar Associados', 'url': 'rel-cad', 'icon': 'icon-print'},
     )
 }

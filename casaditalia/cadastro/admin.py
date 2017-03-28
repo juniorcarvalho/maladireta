@@ -19,6 +19,7 @@ class FamiliaModelAdmin(admin.ModelAdmin):
     list_display = ['nome']
     search_fields = ['nome']
     form = FamiliaForm
+    ordering = ['nome']
 
     class Media:
         css = {

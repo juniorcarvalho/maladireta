@@ -1,26 +1,68 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_static %}
 
-{% block extrastyle %}
-    {{ block.super }}
-{% endblock %}
-
-{% block coltype %}colMS{% endblock %}
-
-{% block bodyclass %}dashboard{% endblock %}
+{#{% block extrastyle %}#}
+{#    {{ block.super }}#}
+{#{% endblock %}#}
+{##}
+{#{% block coltype %}colMS{% endblock %}#}
+{##}
+{#{% block bodyclass %}dashboard{% endblock %}#}
 
 {% block breadcrumbs %}
     <ul class="breadcrumb">
-      <li>
-          <a href="/">Início</a>
-          <span class="divider">»</span>
-      </li>
-      <li class="active">Relatórios do Cadastro</li>
+        <li>
+            <a href="/">Início</a>
+            <span class="divider">»</span>
+        </li>
+        <li class="active">Listar Associados</li>
     </ul>
 {% endblock %}
 
 {% block content %}
     <div id="content-main">
-        <h1>Relatórios do Cadastro</h1>
+        <div class="inner-center-column">
+            <div class="module filtered" id="changelist">
+                <div class="toolbar-content clearfix">
+                    <div id="toolbar" class="clearfix">
+                        <form class="form-inline" method="post">
+                            {% csrf_token %}
+                            <div class="search-container">
+                                <div class="form-group">
+                                    <label for="selectFamilia">Selecione a família</label>
+                                    <span class="search-filters">
+                                    <select class="selectpicker" data-live-search="true" id="selectFamilia"
+                                            style="max-width: 400px">
+                                        {% for familia in familias %}
+                                            <option>{{ familia.nome }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    </span>
+                                    <button type="submit" class="btn btn-info">Listar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+{#    <table id="result_list" class="table table-striped table-bordered table-hover table-condensed">#}
+{#        <thead>#}
+{#        <tr>#}
+{#            <td>Selecione a família</td>#}
+{#        </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        <tr>#}
+{#            <td>#}
+{#                <select class="selectpicker" data-live-search="true">#}
+{#                    {% for familia in familias %}#}
+{#                        <option>{{ familia.nome }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </td>#}
+{#        </tr>#}
+{#        </tbody>#}
+{#    </table>#}
 {% endblock %}
