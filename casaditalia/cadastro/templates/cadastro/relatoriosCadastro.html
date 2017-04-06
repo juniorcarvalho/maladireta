@@ -25,16 +25,16 @@
             <div class="module filtered" id="changelist">
                 <div class="toolbar-content clearfix">
                     <div id="toolbar" class="clearfix">
-                        <form class="form-inline" method="post">
+                        <form class="form-inline" method="post" action="{% url 'rel-cad' %}">
                             {% csrf_token %}
                             <div class="search-container">
                                 <div class="form-group">
                                     <label for="selectFamilia">Selecione a família</label>
                                     <span class="search-filters">
-                                    <select class="selectpicker" data-live-search="true" id="selectFamilia"
+                                    <select class="selectpicker" data-live-search="true" id="selectFamilia" name="selectFamilia"
                                             style="max-width: 400px">
                                         {% for familia in familias %}
-                                            <option>{{ familia.nome }}</option>
+                                            <option value="{{ familia.pk }}">{{ familia.nome }}</option>
                                         {% endfor %}
                                     </select>
                                     </span>
@@ -42,27 +42,45 @@
                                 </div>
                             </div>
                         </form>
+                        {% if lista != None %}
+                            <table id="result_list" class="table table-striped table-bordered table-hover table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            <div class="text">
+                                                Nome
+                                            </div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="text">
+                                                Família(s)
+                                            </div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="text">
+                                                Email
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for associado in lista %}
+                                        <tr class="row1">
+                                           <td class="field-nome">{{ associado.nome }}</td>
+                                           <td class="field-familia">
+                                               {% for f in associado.associadofamilia_set.all %}
+                                                 {{ f.familia }}
+                                               {% endfor %}
+                                           </td>
+                                           <td class="field-email">{{ associado.email }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-{#    <table id="result_list" class="table table-striped table-bordered table-hover table-condensed">#}
-{#        <thead>#}
-{#        <tr>#}
-{#            <td>Selecione a família</td>#}
-{#        </tr>#}
-{#        </thead>#}
-{#        <tbody>#}
-{#        <tr>#}
-{#            <td>#}
-{#                <select class="selectpicker" data-live-search="true">#}
-{#                    {% for familia in familias %}#}
-{#                        <option>{{ familia.nome }}</option>#}
-{#                    {% endfor %}#}
-{#                </select>#}
-{#            </td>#}
-{#        </tr>#}
-{#        </tbody>#}
-{#    </table>#}
 {% endblock %}

@@ -19,7 +19,7 @@ from casaditalia.cadastro import views
 
 urlpatterns = [
     url(r'^', admin.site.urls),
-    url(r'^relatorio-cadastro/$', views.relatorioCadastro,name='rel-cad'),
+    url(r'^relatorio-cadastro/$', views.relatorioCadastro, name='rel-cad'),
 ]
 
 admin.site.site_header = 'Casa Ditália Barbacena'

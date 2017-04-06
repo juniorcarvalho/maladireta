@@ -80,8 +80,10 @@ class Associado(models.Model):
 
 
 class AssociadoFamilia(models.Model):
-    associado = models.ForeignKey(Associado, verbose_name='associado')
-    familia = models.ForeignKey(Familia, verbose_name='familia', on_delete=models.CASCADE)
+    associado = models.ForeignKey(Associado, verbose_name='associado',
+                                  on_delete=models.CASCADE)
+
+    familia = models.ForeignKey(Familia, verbose_name='familia')
 
     class Meta:
         verbose_name = 'família'

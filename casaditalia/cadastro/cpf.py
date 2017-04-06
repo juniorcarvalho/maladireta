@@ -1,5 +1,6 @@
 # fonte: http://www.python.org.br/wiki/VerificadorDeCPF
 import re
+
 # traduz 123.456.789-10 para 12345678910
 _translate = lambda cpf: ''.join(re.findall("\d", cpf))
 
@@ -12,7 +13,10 @@ def _exceptions(cpf):
         return True
     else:
         s = ''.join(str(x) for x in cpf)
-        if s == '00000000000' or s == '11111111111' or s == '22222222222' or s == '33333333333' or s == '44444444444' or s == '55555555555' or s == '66666666666' or s == '77777777777' or s == '88888888888' or s == '99999999999':
+        if s == '00000000000' or s == '11111111111' or s == '22222222222' or \
+                        s == '33333333333' or s == '44444444444' or s == '55555555555' or \
+                        s == '66666666666' or s == '77777777777' or s == '88888888888' or \
+                        s == '99999999999':
             return True
     return False
 
@@ -50,7 +54,7 @@ class CPF(object):
 
         """
 
-        if isinstance(cpf, str ):
+        if isinstance(cpf, str):
             if not cpf.isdigit():
                 cpf = self._translate(cpf)
 
@@ -58,9 +62,7 @@ class CPF(object):
 
     def __getitem__(self, index):
         """Retorna o dígito em index como string
-
         """
-
         return self.cpf[index]
 
     def __repr__(self):
