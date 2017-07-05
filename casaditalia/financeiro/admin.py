@@ -1,15 +1,27 @@
 from django.contrib import admin
-#from .models import Receber
+from .models import Receber
 from .forms import ReceberForm
 from django.conf import settings
 
 
 class ReceberModelAdmin(admin.ModelAdmin):
-    list_display = ['associado', 'ano_ref', 'valor', 'data_ven', 'data_pag']
+    list_display = ['associado', 'ano_ref','nosso_numero', 'valor', 'data_ven', 'data_pag']
     search_fields = ['associado', 'ano_ref']
     list_filter = ['associado', 'ano_ref', 'data_pag']
 
     form = ReceberForm
+
+    fieldsets = [
+        (None,
+         {'fields': ['associado', 'ano_ref', 'nosso_numero']}
+         ),
+        (None,
+         {'fields': [('data_doc', 'data_ven'), 'data_pag']}
+         ),
+        (None,
+         {'fields': ['valor', 'observacoes']}
+         )
+    ]
 
     class Media:
         js = (
@@ -19,4 +31,4 @@ class ReceberModelAdmin(admin.ModelAdmin):
         )
 
 
-#admin.site.register(Receber, ReceberModelAdmin)
+admin.site.register(Receber, ReceberModelAdmin)

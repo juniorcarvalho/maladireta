@@ -25,29 +25,54 @@ class AssociadoForm(ModelForm):
         return self.cleaned_data['cpf']
 
     def clean_nome(self):
-        return self.cleaned_data.get('nome').upper()
+        nome = self.cleaned_data.get('nome')
+        if nome != None:
+            return self.cleaned_data.get('nome').upper()
+        else:
+            raise forms.ValidationError('Nome inválido')
 
     def clean_endereco(self):
-        return self.cleaned_data.get('endereco').upper()
+        endereco = self.cleaned_data.get('endereco')
+        if endereco != None:
+            return self.cleaned_data.get('endereco').upper()
+        else:
+            return ''
 
     def clean_complemento(self):
-        return self.cleaned_data.get('complemento').upper()
+        complemento = self.cleaned_data.get('complemento')
+        if complemento != None:
+            return self.cleaned_data.get('complemento').upper()
+        else:
+            return ''
 
     def clean_bairro(self):
-        return self.cleaned_data.get('bairro').upper()
+        bairro = self.cleaned_data.get('bairro')
+        if bairro != None:
+            return self.cleaned_data.get('bairro').upper()
+        else:
+            return ''
 
     def clean_cidade(self):
-        return self.cleaned_data.get('cidade').upper()
+        cidade = self.cleaned_data.get('cidade')
+        if cidade != None:
+            return self.cleaned_data.get('cidade').upper()
+        else:
+            return ''
 
     def clean_uf(self):
-        return self.cleaned_data.get('uf').upper()
+        uf = self.cleaned_data.get('uf')
+        if uf != None:
+            return self.cleaned_data.get('uf').upper()
+        else:
+            return ''
 
     def clean_email(self):
         email_old = self.instance.email
         email_new = self.cleaned_data.get('email')
-        if len(email_new) > 0:
-            if Associado.objects.filter(email=email_new).exclude(email=email_old).exists():
-                raise forms.ValidationError('Email já cadastrado')
+        if email_new != None:
+            if len(email_new) > 0:
+                if Associado.objects.filter(email=email_new).exclude(email=email_old).exists():
+                    raise forms.ValidationError('Email já cadastrado')
         return self.cleaned_data['email']
 
         # def clean(self):

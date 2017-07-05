@@ -20,6 +20,8 @@ from casaditalia.cadastro import views
 urlpatterns = [
     url(r'^', admin.site.urls),
     url(r'^relatorio-cadastro/$', views.relatorioCadastro, name='rel-cad'),
+    url(r'^etiqueta-associado/$', views.etiquetaAssociado, name='eti-ass'),
+    # url(r'^etiqueta-print/$', views.etiquetaPrint, name='eti-pri'),
 ]
 
 admin.site.site_header = 'Casa Ditália Barbacena'

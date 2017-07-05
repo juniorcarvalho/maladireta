@@ -137,7 +137,12 @@ SUIT_CONFIG = {
         'sites',
         {'app': 'auth', 'models': ('user', 'group')},
         '-',
-        {'app': 'cadastro', 'models':('Associado', 'Familia', 'Grupo')},
+        {'app': 'cadastro', 'models': ('Associado', 'Familia', 'Grupo')},
+        {'app': 'financeiro','models': ('Receber',)},
         {'label': 'Listar Associados', 'url': 'rel-cad', 'icon': 'icon-print'},
+        # {'label': 'Etiquetas Associados', 'url': 'eti-ass', 'icon': 'icon-print'},
     )
 }
+
+
+

@@ -1,0 +1,33 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">Início</a>
+            <span class="divider">»</span>
+        </li>
+        <li class="active">Etiquetas de Associados</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        <div class="inner-center-column">
+            <div class="form-inline">
+            <label for="selectGrupo">Selecione o grupo</label>
+            <select class="selectpicker" data-live-search="true" id="selectGrupo" name="selectGrupo"
+                    style="max-width: 400px">
+                {% for grupo in grupos %}
+                    <option value="{{ grupo.pk }}">{{ grupo.nome }}</option>
+                {% endfor %}
+            </select>
+{#            <button type="submit" class="btn btn-info">Listar</button>#}
+            <li>
+                <a class="btn btn-info" href="{% url 'eti-pri' grupo.pk %}" onclick="new Window('{% url "eti-pri" grupo.pk %}','_blank');">Listar</a>
+            </li>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

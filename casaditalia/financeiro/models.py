@@ -18,7 +18,7 @@ class Receber(models.Model):
     data_pag = models.DateField('Data Pagamento', null=True, blank=True)
     valor = models.DecimalField('Valor', decimal_places=2, max_digits=9)
     observacoes = models.TextField('Observações', max_length=500, null=True, blank=True)
-
+    nosso_numero = models.CharField('Nosso Nro.', max_length=20, null=True, blank=True)
     created = models.DateTimeField('Criado em', auto_now_add=True)
     modified = models.DateTimeField('Modificado em', auto_now=True)
 
